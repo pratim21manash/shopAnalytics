@@ -4,7 +4,7 @@ import { CatchError, TryError } from "../utils/error.js";
 export const getProducts = async (req,res) => {
     try {
         const products = await Product.find().sort({createdAt: -1})
-        res.json(getProducts)
+        res.json(products)
     }
     catch(err){
         CatchError(err, res)
@@ -20,6 +20,8 @@ export const getProduct = async(req, res) => {
         if (!product){
             throw TryError("Product not found", 404)
         }
+
+        res.json(product)
     }
     catch(err){
         CatchError(err, res)

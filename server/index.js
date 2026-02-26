@@ -19,13 +19,7 @@ app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-
 app.use('/api/products', productRoutes)
-
-//Health check
-app.get('/health', (req, res) => {
-    res.json({status: "OK", timestamp: new Date()})
-})
 
 //404 error handler
 app.use((req,res) => {
@@ -33,5 +27,5 @@ app.use((req,res) => {
 })
 
 app.listen(process.env.PORT || 8080 , () => {
-    console.log("Server is running")
+    console.log(`Server is running on ${process.env.PORT}`)
 })
