@@ -6,16 +6,21 @@ import mongoose from "mongoose"
 import cors from "cors"
 import cookieParser from "cookie-parser"
 
+import productRoutes from "./src/routes/product.routes.js"
+
 const app = express()
+
+mongoose.connect(process.env.DB_URL)
+    .then(() => console.log("Database connected successfully"))
+    .catch(err => console.log("MongoDb connection failed", err))
 
 app.use(cors())
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
-mongoose.connect(process.env.DB_URL)
-    .then(() => console.log("Database connected successfully"))
-    .catch(err => console.log("MongoDb connection failed", err))
+
+app.use('/api/products', productRoutes)
 
 //Health check
 app.get('/health', (req, res) => {
