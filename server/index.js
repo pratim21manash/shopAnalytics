@@ -7,6 +7,7 @@ import cors from "cors"
 import cookieParser from "cookie-parser"
 
 import productRoutes from "./src/routes/product.routes.js"
+import saleRouter from "./src/routes/sale.route.js"
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use(express.urlencoded({ extended: true }))
 app.use(cookieParser())
 
 app.use('/api/products', productRoutes)
+app.use('/api/sales', saleRouter)
 
 //404 error handler
 app.use((req,res) => {
